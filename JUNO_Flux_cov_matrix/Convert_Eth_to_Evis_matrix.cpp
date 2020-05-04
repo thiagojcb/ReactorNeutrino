@@ -29,9 +29,9 @@ void Convert_Eth_to_Evis_matrix(Int_t SIMS=1000, Bool_t isDYB = false){
   
   TFile* fDet[nDet];
   if(!isDYB)
-    fDet[kFar]  = new TFile("../data/events_SPMT_1e+06evt_2020_HuberHaag.root");
+    fDet[kFar]  = new TFile("../data/events_SPMT_1e+07evt_2020_HuberHaag.root");
   else
-    fDet[kFar]  = new TFile("../data/events_SPMT_1e+06evt_2020_DYB.root");
+    fDet[kFar]  = new TFile("../data/events_SPMT_1e+07evt_2020_DYB.root");
   
   TTree* tDet[nDet];
   tDet[kFar] = (TTree*)fDet[kFar]->Get("FinalFitIBDTree");
@@ -90,9 +90,9 @@ void Convert_Eth_to_Evis_matrix(Int_t SIMS=1000, Bool_t isDYB = false){
   TFile* rxtrFile;
 
   if(!isDYB)
-    rxtrFile = new TFile("../data/FluxPredMat_1000sims_HuberHaag_tot.root","READ");
+    rxtrFile = new TFile("../data/FluxPredMat_10000sims_HuberHaag_tot.root","READ");
   else
-    rxtrFile = new TFile("../data/FluxPredMat_1000sims_DayaBay_tot.root","READ");
+    rxtrFile = new TFile("../data/FluxPredMat_10000sims_DayaBay_tot.root","READ");
   
   TMatrixD* rxtCovMat = (TMatrixD*)rxtrFile->Get("flux_cov");
 

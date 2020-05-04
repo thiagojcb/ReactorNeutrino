@@ -233,9 +233,9 @@ void IBD_Gen(int date = 2020, int nevt = 100, Bool_t isDYB=false, int initrand =
   TFile* fFluxFile;
   
   if(isDYB)
-    fFluxFile = new TFile("../../data/FluxPredMat_1000sims_DayaBay_tot.root");
+    fFluxFile = new TFile("../../data/FluxPredMat_10000sims_DayaBay_tot.root");
   else
-    fFluxFile = new TFile("../../data/FluxPredMat_1000sims_HuberHaag_tot.root");
+    fFluxFile = new TFile("../../data/FluxPredMat_10000sims_HuberHaag_tot.root");
 
   hDetHist = (TH1D*)fFluxFile->Get(Form("h%s",tDet[det].Data()));
 
