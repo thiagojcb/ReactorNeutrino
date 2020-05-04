@@ -567,7 +567,7 @@ void MakeCovMat(Int_t nSims = 1000){
          }
        }
 
-   TFile* outfile = new TFile(Form("FluxPredMat_%dsims_DayaBay_%s.root",nSims,tUncConfig.Data()),"RECREATE");
+   TFile* outfile = new TFile(Form("../../data/FluxPredMat_%dsims_DayaBay_%s.root",nSims,tUncConfig.Data()),"RECREATE");
 
    simMat->Write("flux_cov");
    fracMat->Write("flux_frac_cov");

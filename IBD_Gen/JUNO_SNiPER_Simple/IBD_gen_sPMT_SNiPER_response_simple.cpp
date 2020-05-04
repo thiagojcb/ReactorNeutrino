@@ -67,7 +67,7 @@ enum TypeRxt
   };
 
 //Detector names
-TString tDet[kDet_max]={"Far"};
+TString tDet[kDet_max]={"JUNO"};
 
 
 // position in mm on a frame where the origin is a mid-point btw reactors centers
@@ -224,16 +224,20 @@ Double_t GetPositronE(Double_t Enu){
 
 }
 
-void IBD_Gen(int date = 2020, int nevt = 100, int initrand = 0, Int_t opt = 3, Double_t Detector_Lx=17.7e3, Double_t Detector_Ly=0.0, Double_t Detector_Lz=0.0, Int_t det=kFar, Bool_t addElecMass=false) //if Lz = 0, then cylindrical volume (Lx = radius, Ly = height)
+void IBD_Gen(int date = 2020, int nevt = 100, Bool_t isDYB=false, int initrand = 0, Int_t opt = 3, Double_t Detector_Lx=17.7e3, Double_t Detector_Ly=0.0, Double_t Detector_Lz=0.0, Int_t det=kFar, Bool_t addElecMass=false) //if Lz = 0, then cylindrical volume (Lx = radius, Ly = height)
 {
   
   delete gRandom;
   gRandom = new TRandom3(initrand);
 
-  //TFile fFluxFile("FluxPredMat_100000sims_Huber_tot_config1.root");
-  TFile fFluxFile("FluxPredMat_10000sims_DayaBay_tot.root");
+  TFile* fFluxFile;
+  
+  if(isDYB)
+    fFluxFile = new TFile("../../data/FluxPredMat_1000sims_DayaBay_tot.root");
+  else
+    fFluxFile = new TFile("../../data/FluxPredMat_1000sims_HuberHaag_tot.root");
 
-  hDetHist = (TH1D*)fFluxFile.Get(Form("h%s",tDet[det].Data()));
+  hDetHist = (TH1D*)fFluxFile->Get(Form("h%s",tDet[det].Data()));
 
   
   
@@ -267,8 +271,10 @@ void IBD_Gen(int date = 2020, int nevt = 100, int initrand = 0, Int_t opt = 3, D
   }
 
   TFile *newFile;
-  //newFile = new TFile(Form("events_SPMT_%.0eevt_FFIT.root",(float) nevt),"recreate");
-  newFile = new TFile(Form("events_SPMT_%.0eevt_%d_test_DYB.root",(float) nevt,date),"recreate");
+  if(isDYB)
+    newFile = new TFile(Form("../../data/events_SPMT_%.0eevt_%d_DYB.root",(float) nevt,date),"recreate");
+  else
+    newFile = new TFile(Form("../../data/events_SPMT_%.0eevt_%d_HuberHaag.root",(float) nevt,date),"recreate");
 
   TTree *newTree = new TTree("FinalFitIBDTree","FinalFitIBDTree");
 
