@@ -39,7 +39,7 @@ This will generate a root file as output containing the covariance matrix.
 
 This macro uses the output of step 1) and 2). The file names are hard-coded, so if `10000` of step 1) and/or `1e7` of step 2) is changed, the code need to be updated accordingly. Histogram binning is hard-coded here. If binning scheme changes, code need to be updated.
 
-### Energy Scale covariance model (DC based)
+### 4) Energy Scale covariance model (DC based)
 Under `JUNO_Escale_cov_matrix` directory, this step is to generate the covariance matrix associated with the energy model assumed (DC based here).
 To run it, go into the respective directory, run root and do the following example commands:
 ```
